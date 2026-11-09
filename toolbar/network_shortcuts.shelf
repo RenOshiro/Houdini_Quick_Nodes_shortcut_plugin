@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shelfDocument>
+  <tool name="qns_merge_multiply" label="NS: Merge / Multiply" icon="MISC_python">
+    <script scriptType="python"><![CDATA[import network_shortcuts
+network_shortcuts.run('merge_multiply')
+]]></script>
+  </tool>
+  <tool name="qns_wrangle" label="NS: Attribute Wrangle" icon="MISC_python">
+    <script scriptType="python"><![CDATA[import network_shortcuts
+network_shortcuts.run('wrangle')
+]]></script>
+  </tool>
+  <tool name="qns_group_expression" label="NS: Group Expression" icon="MISC_python">
+    <script scriptType="python"><![CDATA[import network_shortcuts
+network_shortcuts.run('group_expression')
+]]></script>
+  </tool>
+  <tool name="qns_attrib_vop_combine" label="NS: Attribute VOP / Combine (Floats to Vector)" icon="MISC_python">
+    <script scriptType="python"><![CDATA[import network_shortcuts
+network_shortcuts.run('attrib_vop_combine')
+]]></script>
+  </tool>
+  <tool name="qns_blast_bind" label="NS: Blast (Delete Geometry) / Bind (Named Attribute)" icon="MISC_python">
+    <script scriptType="python"><![CDATA[import network_shortcuts
+network_shortcuts.run('blast_bind')
+]]></script>
+  </tool>
+  <tool name="qns_transform" label="NS: Transform" icon="MISC_python">
+    <script scriptType="python"><![CDATA[import network_shortcuts
+network_shortcuts.run('transform')
+]]></script>
+  </tool>
+  <tool name="qns_copy_clamp" label="NS: Copy to Points (Instance on Points) / Clamp" icon="MISC_python">
+    <script scriptType="python"><![CDATA[import network_shortcuts
+network_shortcuts.run('copy_clamp')
+]]></script>
+  </tool>
+  <tool name="qns_scatter_mix" label="NS: Scatter (Distribute Points) / Mix" icon="MISC_python">
+    <script scriptType="python"><![CDATA[import network_shortcuts
+network_shortcuts.run('scatter_mix')
+]]></script>
+  </tool>
+  <tool name="qns_switch_subtract" label="NS: Switch / Subtract" icon="MISC_python">
+    <script scriptType="python"><![CDATA[import network_shortcuts
+network_shortcuts.run('switch_subtract')
+]]></script>
+  </tool>
+  <tool name="qns_null" label="NS: Null (Output marker)" icon="MISC_python">
+    <script scriptType="python"><![CDATA[import network_shortcuts
+network_shortcuts.run('null')
+]]></script>
+  </tool>
+  <tool name="qns_attribcreate_add" label="NS: Attribute Create (Store Named Attribute) / Add" icon="MISC_python">
+    <script scriptType="python"><![CDATA[import network_shortcuts
+network_shortcuts.run('attribcreate_add')
+]]></script>
+  </tool>
+  <tool name="qns_attribdelete_divide" label="NS: Attribute Delete / Divide" icon="MISC_python">
+    <script scriptType="python"><![CDATA[import network_shortcuts
+network_shortcuts.run('attribdelete_divide')
+]]></script>
+  </tool>
+  <tool name="qns_object_merge" label="NS: Object Merge (Object Input)" icon="MISC_python">
+    <script scriptType="python"><![CDATA[import network_shortcuts
+network_shortcuts.run('object_merge')
+]]></script>
+  </tool>
+  <tool name="qns_resample_random" label="NS: Resample / Random Value" icon="MISC_python">
+    <script scriptType="python"><![CDATA[import network_shortcuts
+network_shortcuts.run('resample_random')
+]]></script>
+  </tool>
+  <tool name="qns_parameter" label="NS: Parameter (Group Input)" icon="MISC_python">
+    <script scriptType="python"><![CDATA[import network_shortcuts
+network_shortcuts.run('parameter')
+]]></script>
+  </tool>
+  <tool name="qns_fit" label="NS: Fit Range (Map Range)" icon="MISC_python">
+    <script scriptType="python"><![CDATA[import network_shortcuts
+network_shortcuts.run('fit')
+]]></script>
+  </tool>
+  <tool name="qns_compare" label="NS: Compare" icon="MISC_python">
+    <script scriptType="python"><![CDATA[import network_shortcuts
+network_shortcuts.run('compare')
+]]></script>
+  </tool>
+  <tool name="qns_const_float" label="NS: Constant: Float" icon="MISC_python">
+    <script scriptType="python"><![CDATA[import network_shortcuts
+network_shortcuts.run('const_float')
+]]></script>
+  </tool>
+  <tool name="qns_const_vector2" label="NS: Constant: Vector2" icon="MISC_python">
+    <script scriptType="python"><![CDATA[import network_shortcuts
+network_shortcuts.run('const_vector2')
+]]></script>
+  </tool>
+  <tool name="qns_const_vector3" label="NS: Constant: Vector3" icon="MISC_python">
+    <script scriptType="python"><![CDATA[import network_shortcuts
+network_shortcuts.run('const_vector3')
+]]></script>
+  </tool>
+  <tool name="qns_const_vector4" label="NS: Constant: Vector4" icon="MISC_python">
+    <script scriptType="python"><![CDATA[import network_shortcuts
+network_shortcuts.run('const_vector4')
+]]></script>
+  </tool>
+  <tool name="qns_admin_keys" label="NS: Customize keys..." icon="MISC_python">
+    <script scriptType="python"><![CDATA[import network_shortcuts.ui as ui
+ui.show()
+]]></script>
+  </tool>
+  <toolshelf name="network_shortcuts" label="Network Shortcuts">
+    <memberTool name="qns_admin_keys"/>
+    <memberTool name="qns_merge_multiply"/>
+    <memberTool name="qns_wrangle"/>
+    <memberTool name="qns_group_expression"/>
+    <memberTool name="qns_attrib_vop_combine"/>
+    <memberTool name="qns_blast_bind"/>
+    <memberTool name="qns_transform"/>
+    <memberTool name="qns_copy_clamp"/>
+    <memberTool name="qns_scatter_mix"/>
+    <memberTool name="qns_switch_subtract"/>
+    <memberTool name="qns_null"/>
+    <memberTool name="qns_attribcreate_add"/>
+    <memberTool name="qns_attribdelete_divide"/>
+    <memberTool name="qns_object_merge"/>
+    <memberTool name="qns_resample_random"/>
+    <memberTool name="qns_parameter"/>
+    <memberTool name="qns_fit"/>
+    <memberTool name="qns_compare"/>
+    <memberTool name="qns_const_float"/>
+    <memberTool name="qns_const_vector2"/>
+    <memberTool name="qns_const_vector3"/>
+    <memberTool name="qns_const_vector4"/>
+  </toolshelf>
+</shelfDocument>

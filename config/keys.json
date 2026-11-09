@@ -1,0 +1,27 @@
+{
+  "description": "Default key layout. Single keys in the Network Editor; OVERWRITES Houdini's own bindings for the same keys (originals are backed up and restorable). Change keys in the Customize window or user.json.",
+  "keys": {
+    "merge_multiply": "M",
+    "wrangle": "W",
+    "group_expression": "G",
+    "attrib_vop_combine": "V",
+    "blast_bind": "B",
+    "transform": "T",
+    "copy_clamp": "C",
+    "scatter_mix": "X",
+    "switch_subtract": "S",
+    "null": "N",
+    "attribcreate_add": "A",
+    "attribdelete_divide": "D",
+    "object_merge": "O",
+    "resample_random": "R",
+    "parameter": "P",
+    "fit": "F",
+    "compare": "Q",
+    "const_float": "1",
+    "const_vector2": "2",
+    "const_vector3": "3",
+    "const_vector4": "4"
+  }
+}
+

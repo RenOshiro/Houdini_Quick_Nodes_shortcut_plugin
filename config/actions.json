@@ -1,0 +1,99 @@
+{
+  "_comment": "One action = one shelf tool = one hotkey. Each action maps a network type (sop/vop) to a node. Add your own actions in user.json.",
+  "actions": {
+    "merge_multiply": {
+      "label": "Merge / Multiply",
+      "sop": {"type": "merge"},
+      "vop": {"type": "multiply"}
+    },
+    "wrangle": {
+      "label": "Attribute Wrangle",
+      "sop": {"type": "attribwrangle"}
+    },
+    "group_expression": {
+      "label": "Group Expression",
+      "sop": {"type": "groupexpression"}
+    },
+    "attrib_vop_combine": {
+      "label": "Attribute VOP / Combine (Floats to Vector)",
+      "sop": {"type": "attribvop"},
+      "vop": {"type": "floattovec"}
+    },
+    "blast_bind": {
+      "label": "Blast (Delete Geometry) / Bind (Named Attribute)",
+      "sop": {"type": "blast"},
+      "vop": {"type": "bind"}
+    },
+    "transform": {
+      "label": "Transform",
+      "sop": {"type": "xform"}
+    },
+    "copy_clamp": {
+      "label": "Copy to Points (Instance on Points) / Clamp",
+      "sop": {"type": "copytopoints"},
+      "vop": {"type": "clamp"}
+    },
+    "scatter_mix": {
+      "label": "Scatter (Distribute Points) / Mix",
+      "sop": {"type": "scatter"},
+      "vop": {"type": "mix"}
+    },
+    "switch_subtract": {
+      "label": "Switch / Subtract",
+      "sop": {"type": "switch"},
+      "vop": {"type": "subtract"}
+    },
+    "null": {
+      "label": "Null (Output marker)",
+      "sop": {"type": "null"},
+      "vop": {"type": "null"}
+    },
+    "attribcreate_add": {
+      "label": "Attribute Create (Store Named Attribute) / Add",
+      "sop": {"type": ["attribcreate::2.0", "attribcreate"]},
+      "vop": {"type": "add"}
+    },
+    "attribdelete_divide": {
+      "label": "Attribute Delete / Divide",
+      "sop": {"type": "attribdelete"},
+      "vop": {"type": "divide"}
+    },
+    "object_merge": {
+      "label": "Object Merge (Object Input)",
+      "sop": {"type": "object_merge"}
+    },
+    "resample_random": {
+      "label": "Resample / Random Value",
+      "sop": {"type": "resample"},
+      "vop": {"type": "random"}
+    },
+    "parameter": {
+      "label": "Parameter (Group Input)",
+      "vop": {"type": "parameter"}
+    },
+    "fit": {
+      "label": "Fit Range (Map Range)",
+      "vop": {"type": "fit"}
+    },
+    "compare": {
+      "label": "Compare",
+      "vop": {"type": "compare"}
+    },
+    "const_float": {
+      "label": "Constant: Float",
+      "vop": {"type": "constant", "parms": {"consttype": "float"}}
+    },
+    "const_vector2": {
+      "label": "Constant: Vector2",
+      "vop": {"type": "constant", "parms": {"consttype": "float2"}}
+    },
+    "const_vector3": {
+      "label": "Constant: Vector3",
+      "vop": {"type": "constant", "parms": {"consttype": "float3"}}
+    },
+    "const_vector4": {
+      "label": "Constant: Vector4",
+      "vop": {"type": "constant", "parms": {"consttype": "float4"}}
+    }
+  }
+}
