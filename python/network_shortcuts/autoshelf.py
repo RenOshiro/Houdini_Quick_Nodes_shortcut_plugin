@@ -60,5 +60,18 @@ def start():
             return
         hou.ui.removeEventLoopCallback(_once)
         ensure()
+        # the welcome dialog is modal and blocks redraws, so show it a little later,
+        # after Houdini has drawn the new shelf tab
+        later = {"n": 0}
+
+        def _welcome():
+            later["n"] += 1
+            if later["n"] < 20:
+                return
+            hou.ui.removeEventLoopCallback(_welcome)
+            from . import welcome
+            welcome.maybe_show()
+
+        hou.ui.addEventLoopCallback(_welcome)
 
     hou.ui.addEventLoopCallback(_once)

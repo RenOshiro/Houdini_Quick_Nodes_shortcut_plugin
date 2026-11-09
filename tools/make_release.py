@@ -1,4 +1,4 @@
-"""Build dist/houdini-network-shortcuts-<version>.zip  (plain Python 3, no Houdini needed).
+"""Build dist/houdini-network-shortcuts.zip (top folder inside carries the version)  (plain Python 3, no Houdini needed).
 
     python tools/make_release.py
 
@@ -15,7 +15,7 @@ import zipfile
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "python"))
 
-INCLUDE = ("install.py", "install.bat", "README.md", "LICENSE", "CHANGELOG.md",
+INCLUDE = ("install.py", "install.bat", "README.md", "README.ja.md", "LICENSE", "CHANGELOG.md",
            "config", "python", "python3.10libs", "python3.11libs", "python3.13libs",
            "toolbar", "tests", "tools")
 SKIP_DIRS = {"__pycache__", ".git", "dist"}
@@ -39,7 +39,8 @@ def main():
     ver = version()
     top = "houdini-network-shortcuts-%s" % ver
     os.makedirs(os.path.join(ROOT, "dist"), exist_ok=True)
-    out = os.path.join(ROOT, "dist", top + ".zip")
+    # a version-less file name, so .../releases/latest/download/houdini-network-shortcuts.zip always works
+    out = os.path.join(ROOT, "dist", "houdini-network-shortcuts.zip")
     count = 0
     with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as zf:
         for item in INCLUDE:

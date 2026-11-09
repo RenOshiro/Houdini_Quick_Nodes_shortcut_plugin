@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.0
+- First start after installing shows a welcome window with a one-click **Turn on keys now** button.
+- README rewritten as a 3-step quick start with screenshots; added a Japanese README.
+- The release zip has a fixed name (houdini-network-shortcuts.zip), so the download link in the README always points to the latest version.
+
 ## 0.2.0
 - One default key layout (presets removed); `Reset keys to defaults` in the window.
 - Key settings window: change keys, conflict display, enable / disable (restores your original keymap), custom nodes picked from lists, delete custom nodes.
