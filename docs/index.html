@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Houdini Network Shortcuts - one-key node creation for SOP and VOP</title>
+<meta name="description" content="Press one key to create a node at the mouse cursor in the Houdini Network Editor. Merge in SOP, Multiply in VOP. Free, with a key settings window. Houdini ショートカット: キー1つでノードを作成。">
+<link rel="canonical" href="https://renoshiro.github.io/Houdini_Quick_Nodes_shortcut_plugin/">
+<meta property="og:title" content="Houdini Network Shortcuts">
+<meta property="og:description" content="One key press creates a node at the mouse cursor in the Houdini Network Editor (SOP / VOP).">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://renoshiro.github.io/Houdini_Quick_Nodes_shortcut_plugin/">
+<meta property="og:image" content="https://renoshiro.github.io/Houdini_Quick_Nodes_shortcut_plugin/img/keys-window.png">
+<style>
+  :root { --bg:#fff; --fg:#1b1f24; --muted:#59636e; --accent:#d9480f; --card:#f6f8fa; --line:#d0d7de; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#14171a; --fg:#e6e9ec; --muted:#9aa4af; --accent:#ff8a4c; --card:#1d2227; --line:#2f363d; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.7 system-ui,-apple-system,"Segoe UI","Hiragino Sans","Yu Gothic UI",sans-serif; }
+  main { max-width: 860px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: 2rem; margin: .4em 0 .2em; }
+  h2 { margin-top: 2.2em; border-bottom: 1px solid var(--line); padding-bottom: .3em; }
+  p.lead { font-size: 1.1rem; color: var(--muted); margin-top: 0; }
+  .btn { display:inline-block; background:var(--accent); color:#fff; padding:.8em 1.4em; border-radius:8px; text-decoration:none; font-weight:700; }
+  .btn.sub { background:transparent; color:var(--accent); border:2px solid var(--accent); margin-left:.5em; }
+  .steps { counter-reset: s; list-style:none; padding:0; }
+  .steps li { counter-increment: s; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:.9em 1em .9em 3.2em; margin:.7em 0; position:relative; }
+  .steps li::before { content: counter(s); position:absolute; left:.9em; top:.8em; width:1.7em; height:1.7em; border-radius:50%; background:var(--accent); color:#fff; text-align:center; font-weight:700; line-height:1.7em; }
+  img { max-width:100%; height:auto; border:1px solid var(--line); border-radius:8px; }
+  table { border-collapse: collapse; width:100%; }
+  th, td { border:1px solid var(--line); padding:.4em .7em; text-align:left; }
+  th { background:var(--card); }
+  code { background:var(--card); padding:.1em .4em; border-radius:4px; }
+  .note { color:var(--muted); font-size:.92rem; }
+  footer { margin-top:3em; color:var(--muted); font-size:.9rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Houdini Network Shortcuts</h1>
+  <p class="lead">Press one key, get a node at your mouse cursor in the Houdini Network Editor, like quick-add in Blender Geometry Nodes or Unreal. The same key makes the right node for the network you are in: <code>M</code> = Merge in SOP, Multiply in VOP.<br>
+  キーを1回押すだけで、Houdini の Network Editor のマウス位置にノードを作成。<code>M</code> は SOP なら Merge、VOP なら Multiply。</p>
+  <p>
+    <a class="btn" href="https://github.com/RenOshiro/Houdini_Quick_Nodes_shortcut_plugin/releases/latest/download/houdini-network-shortcuts.zip">Download (zip) / ダウンロード</a>
+    <a class="btn sub" href="https://github.com/RenOshiro/Houdini_Quick_Nodes_shortcut_plugin">GitHub</a>
+  </p>
+  <p class="note">Tested on Houdini 22.0.466 (Windows) only. / 動作確認は Houdini 22.0.466 (Windows) のみです。</p>
+
+  <h2>Install in 3 steps / 3ステップで導入</h2>
+  <ol class="steps">
+    <li><b>Install.</b> Unzip the download and double-click <code>install.bat</code> (Windows). / zip を展開して <code>install.bat</code> をダブルクリック。</li>
+    <li><b>Start Houdini</b> and click <b>Turn on keys now</b> in the welcome window. / Houdini を起動し、案内ウィンドウの <b>Turn on keys now</b> をクリック。</li>
+    <li><b>Restart Houdini once.</b> Done. / Houdini を一度だけ再起動。完了です。</li>
+  </ol>
+  <img src="img/welcome-dialog.png" alt="Welcome window with the Turn on keys now button" width="500">
+
+  <h2>Keys / キー一覧(抜粋)</h2>
+  <table>
+    <tr><th>Key</th><th>SOP</th><th>VOP</th></tr>
+    <tr><td><code>M</code></td><td>Merge</td><td>Multiply</td></tr>
+    <tr><td><code>W</code></td><td>Attribute Wrangle</td><td></td></tr>
+    <tr><td><code>V</code></td><td>Attribute VOP</td><td>Combine (Floats to Vector)</td></tr>
+    <tr><td><code>1</code> <code>2</code> <code>3</code> <code>4</code></td><td></td><td>Constant Float / Vector2 / 3 / 4</td></tr>
+    <tr><td><code>P</code></td><td></td><td>Parameter</td></tr>
+  </table>
+  <p class="note">21 keys in total. The default keys replace Houdini's own single-key Network Editor shortcuts; "Disable" restores them. / 全21キー。初期のキーは Houdini 標準の単独キーを置き換えます。Disable で元に戻せます。</p>
+
+  <h2>Change keys, add your own nodes / キー変更・自作ノード</h2>
+  <p>Open the <b>Network Shortcuts</b> shelf tab and click <b>NS: Customize keys...</b>. Change any key, see which Houdini key it would replace, and add your own nodes picked from searchable lists. / Shelf の Network Shortcuts タブで <b>NS: Customize keys...</b> をクリック。キーの変更、競合の確認、自作ノードの追加ができます。</p>
+  <img src="img/shelf.png" alt="The Network Shortcuts shelf tab and the Customize keys button">
+  <p></p>
+  <img src="img/keys-window.png" alt="The key settings window" width="760">
+
+  <footer>
+    <p>MIT License · <a href="https://github.com/RenOshiro/Houdini_Quick_Nodes_shortcut_plugin">Source and README (English / 日本語)</a> · <a href="https://github.com/RenOshiro/Houdini_Quick_Nodes_shortcut_plugin/releases">Releases</a></p>
+    <p>This is an unofficial tool and is not affiliated with SideFX. Houdini is a trademark of SideFX.</p>
+  </footer>
+</main>
+</body>
+</html>
