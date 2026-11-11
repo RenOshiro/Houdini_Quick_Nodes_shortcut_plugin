@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.0
+- Custom Python script actions, with access to the current Network Editor and network.
+- Changed: the Parameter node now defaults to `Ctrl+P`, so Houdini's own `P` (show parameter dialog) is kept.
+- Fixed: re-applying keys now restores Houdini keys that are no longer replaced.
+
 ## 0.3.0
 - First start after installing shows a welcome window with a one-click **Turn on keys now** button.
 - README rewritten as a 3-step quick start with screenshots; added a Japanese README.

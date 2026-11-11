@@ -41,6 +41,8 @@ def _default_keys():
 
 
 def _node_text(spec, kind):
+    if "python" in spec:
+        return "(Python script)" if kind == "sop" else ""
     node = spec.get(kind)
     if not node:
         return ""
@@ -90,17 +92,39 @@ class AddCustomDialog(QtWidgets.QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setWindowTitle("Add custom node")
-        self.resize(520, 200)
+        self.resize(520, 340)
+        self.action_kind = QtWidgets.QComboBox()
+        self.action_kind.addItems(["Create node", "Run Python script"])
         self.label = QtWidgets.QLineEdit()
         self.sop = NodeCombo(hou.sopNodeTypeCategory())
         self.vop = NodeCombo(hou.vopNodeTypeCategory())
         form = QtWidgets.QFormLayout(self)
+        form.addRow("Action:", self.action_kind)
         form.addRow("Label:", self.label)
-        form.addRow("SOP node:", self.sop)
-        form.addRow("VOP node:", self.vop)
-        form.addRow(QtWidgets.QLabel(
+        pages = QtWidgets.QStackedWidget()
+        node_page = QtWidgets.QWidget()
+        node_form = QtWidgets.QFormLayout(node_page)
+        node_form.setContentsMargins(0, 0, 0, 0)
+        node_form.addRow("SOP node:", self.sop)
+        node_form.addRow("VOP node:", self.vop)
+        node_form.addRow(QtWidgets.QLabel(
             "Pick a node from each list (type to search). Leave a list on (none) "
             "if the key should do nothing in that network."))
+        pages.addWidget(node_page)
+        script_page = QtWidgets.QWidget()
+        script_form = QtWidgets.QFormLayout(script_page)
+        script_form.setContentsMargins(0, 0, 0, 0)
+        self.script = QtWidgets.QPlainTextEdit()
+        self.script.setFont(QtGui.QFontDatabase.systemFont(QtGui.QFontDatabase.FixedFont))
+        script_form.addRow("Python:", self.script)
+        hint = QtWidgets.QLabel(
+            "Variables: hou, editor, parent, kind, cursor (network values may be None).\n"
+            "Example: hou.ui.displayMessage('hi')")
+        hint.setWordWrap(True)
+        script_form.addRow(hint)
+        pages.addWidget(script_page)
+        self.action_kind.currentIndexChanged.connect(pages.setCurrentIndex)
+        form.addRow(pages)
         box = QtWidgets.QDialogButtonBox(QtWidgets.QDialogButtonBox.Ok | QtWidgets.QDialogButtonBox.Cancel)
         box.accepted.connect(self._ok)
         box.rejected.connect(self.reject)
@@ -108,6 +132,19 @@ class AddCustomDialog(QtWidgets.QDialog):
 
     def _ok(self):
         label = self.label.text().strip()
+        if self.action_kind.currentIndex() == 1:
+            code = self.script.toPlainText()
+            if not label or not code.strip():
+                QtWidgets.QMessageBox.warning(self, "Incomplete", "Enter a label and a Python script.")
+                return
+            try:
+                compile(code, "<Network Shortcut>", "exec")
+            except SyntaxError as exc:
+                QtWidgets.QMessageBox.warning(self, "Invalid Python script", str(exc))
+                return
+            self.result_spec = {"label": label, "python": code}
+            self.accept()
+            return
         sop, vop = self.sop.type_name(), self.vop.type_name()
         if sop is None or vop is None:
             QtWidgets.QMessageBox.warning(self, "Pick from the list",
@@ -221,7 +258,7 @@ class KeyWindow(QtWidgets.QDialog):
             edit.keySequenceChanged.connect(self.refresh_conflicts)
             self.table.setCellWidget(row, 3, edit)
             self.table.setItem(row, 4, QtWidgets.QTableWidgetItem(""))
-            if action in self._user.get("actions", {}):          # only your own nodes can be deleted
+            if action in self._user.get("actions", {}):          # only your own actions can be deleted
                 btn = QtWidgets.QPushButton("Delete")
                 btn.clicked.connect(lambda _checked=False, a=action: self.delete_custom(a))
                 self.table.setCellWidget(row, 5, btn)

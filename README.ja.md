@@ -24,11 +24,11 @@ SOP か VOP のネットワークを開き、ノードを置きたい場所に�
 | `W` | Attribute Wrangle | |
 | `V` | Attribute VOP | Combine (Floats to Vector) |
 | `1` `2` `3` `4` | | Constant Float / Vector2 / 3 / 4 |
-| `P` | | Parameter |
+| `Ctrl+P` | | Parameter |
 
 全 21 キーは、下のキー設定ウィンドウで確認できます。自動で結線はしません。SOP と VOP 以外のネットワークでは何も起きません。
 
-> **注意:** 初期設定のキーは、Houdini 標準の Network Editor の単独キー(`P`、`G`、`F`、`S`、`A` など)を置き換えます。**Disable** でいつでも元のキーに戻せます。
+> **注意:** 初期設定のキーは、Houdini 標準の Network Editor の単独キー(`G`、`F`、`S`、`A` など。パラメータ表示の `P` は残します)を置き換えます。**Disable** でいつでも元のキーに戻せます。
 
 ## どこを触ればいい？
 
@@ -46,7 +46,12 @@ SOP か VOP のネットワークを開き、ノードを置きたい場所に�
 - **Key** 欄をクリックして、割り当てたいキーを押します。**Conflict** 欄に、置き換わる Houdini 標準のキーが出ます。同じキーを2つに使うと赤くなり、保存できません。
 - **Enable / Apply keys** で変更を保存し、**Disable (restore original keys)** で全部オフにします。どちらも Houdini の再起動が必要です。下の「Status」で、ENABLED / DISABLED を確認できます。
 - **Reset keys to defaults** で、初期のキー配置に戻ります。
-- **Add custom node...** で、自分のキーを作れます。ラベルを入れ、SOP ノードと VOP ノードを検索できる一覧から選びます(どちらかは `(none)` でも構いません)。自作ノードには **Delete** ボタンが付きます。
+- **Add custom node...** で、自分のキーを作れます。**Create node** を選ぶと、ラベルを入れ、SOP ノードと VOP ノードを検索できる一覧から選べます(どちらかは `(none)` でも構いません)。**Run Python script** を選ぶと、Python スクリプトを実行するアクションを追加できます。スクリプトでは `hou`、`editor`、`parent`、`kind`、`cursor` が使え、どの種類のネットワークでも実行できます(ネットワークに関する変数は `None` になる場合があります)。自作アクションには **Delete** ボタンが付きます。スクリプトの例:
+
+  ```python
+  # あいさつを表示
+  hou.ui.displayMessage('hi')
+  ```
 
 ![カスタムノードの追加](docs/img/custom-node.png)
 

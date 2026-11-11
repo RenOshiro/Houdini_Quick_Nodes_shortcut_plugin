@@ -2,7 +2,8 @@
 
 SOP / VOP are detected from the network being viewed, so the same key makes
 different nodes (e.g. M: Merge in SOP, Multiply in VOP). Other networks are
-left untouched. No auto-wiring.
+left untouched by node actions. Python script actions work in any network.
+No auto-wiring.
 """
 
 import hou
@@ -87,7 +88,25 @@ def create(action, cfg=None, editor=None):
 def run(action):
     """Entry point used by the shelf tools. Never raises into the UI."""
     try:
-        node = create(action)
+        cfg = config.load()
+        spec = cfg["actions"].get(action)
+        if spec is not None and "python" in spec:
+            # Python wins when a spec also defines SOP/VOP nodes.
+            try:
+                editor = find_network_editor()
+            except ShortcutError:
+                editor = None
+            parent = editor.pwd() if editor is not None else None
+            namespace = {"hou": hou, "editor": editor, "parent": parent,
+                         "kind": network_kind(parent) if parent is not None else None,
+                         "cursor": editor.cursorPosition() if editor is not None else None}
+            try:
+                with hou.undos.group("Network Shortcut: %s" % spec.get("label", action)):
+                    exec(spec["python"], namespace)
+            except BaseException as exc:  # user code (even SystemExit) must not escape into the UI
+                hou.ui.setStatusMessage("Network Shortcuts: %s" % exc, severity=hou.severityType.Error)
+            return None
+        node = create(action, cfg=cfg)
         if node is None:
             hou.ui.setStatusMessage("Network Shortcuts: '%s' has no node in this network" % action)
         return node

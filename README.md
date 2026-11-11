@@ -24,11 +24,11 @@ Now open a SOP or VOP network, put the mouse where you want the node and press a
 | `W` | Attribute Wrangle | |
 | `V` | Attribute VOP | Combine (Floats to Vector) |
 | `1` `2` `3` `4` | | Constant Float / Vector2 / 3 / 4 |
-| `P` | | Parameter |
+| `Ctrl+P` | | Parameter |
 
 The full list (21 keys) is in the key settings window below. Nothing is wired automatically, and other network types are left alone.
 
-> **Heads up:** the default keys replace Houdini's own single-key shortcuts in the Network Editor (for example `P`, `G`, `F`, `S`, `A`). You can undo this at any time with **Disable**, which restores your original keys.
+> **Heads up:** the default keys replace Houdini's own single-key shortcuts in the Network Editor (for example `G`, `F`, `S`, `A`; Houdini's `P` for the parameter dialog is kept). You can undo this at any time with **Disable**, which restores your original keys.
 
 ## Where is everything?
 
@@ -46,7 +46,12 @@ A **Network Shortcuts** tab is opened for you on the shelf at startup (and after
 - Click a **Key** box and press the key you want. The **Conflict** column tells you which Houdini key it would replace; two actions on the same key turn red and cannot be applied.
 - **Enable / Apply keys** saves your changes; **Disable (restore original keys)** turns everything off. Both need one Houdini restart. The status line shows ENABLED / DISABLED.
 - **Reset keys to defaults** puts the default layout back.
-- **Add custom node...** makes your own key: type a label and pick a SOP node and a VOP node from searchable lists (either can be `(none)`). Your own nodes get a **Delete** button.
+- **Add custom node...** makes your own key: choose **Create node**, type a label and pick a SOP node and a VOP node from searchable lists (either can be `(none)`), or choose **Run Python script** to add a Python script action. Scripts can use `hou`, `editor`, `parent`, `kind`, and `cursor`, and run in any network (network values can be `None`). Your own actions get a **Delete** button. Example script:
+
+  ```python
+  # Say hi
+  hou.ui.displayMessage('hi')
+  ```
 
 ![Add custom node](docs/img/custom-node.png)
 

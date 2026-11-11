@@ -68,8 +68,12 @@ def validate_action(name, spec):
             raise ValueError("action %r: %s.type must be a string or list of strings" % (name, net))
         if not isinstance(node.get("parms", {}), dict):
             raise ValueError("action %r: %s.parms must be an object" % (name, net))
+    if "python" in spec:
+        if not isinstance(spec["python"], str) or not spec["python"].strip():
+            raise ValueError("action %r: python must be a non-empty string" % name)
+        found = True
     if not found:
-        raise ValueError("action %r defines none of %s" % (name, NETWORKS))
+        raise ValueError("action %r defines none of %s" % (name, NETWORKS + ("python",)))
 
 
 def load(root=None, user_path=None):

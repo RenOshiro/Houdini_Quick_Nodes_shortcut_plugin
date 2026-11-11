@@ -15,7 +15,7 @@
     "attribdelete_divide": "D",
     "object_merge": "O",
     "resample_random": "R",
-    "parameter": "P",
+    "parameter": "Ctrl+P",
     "fit": "F",
     "compare": "Q",
     "const_float": "1",

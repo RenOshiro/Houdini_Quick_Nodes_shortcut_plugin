@@ -102,6 +102,41 @@ def _patch_file(path, bindings):
         json.dump(data, fh, indent="\t")
 
 
+def _restore_live_bindings(path):
+    """Undo earlier conflict removals before planning a new layout, using the first
+    backup rather than installed_keys.json so older installs are restored too."""
+    if not os.path.isfile(path):
+        return
+    try:
+        with open(path, "r", encoding="utf-8-sig") as fh:
+            current = json.load(fh)
+        with open(_backup_path(), "r", encoding="utf-8-sig") as fh:
+            backup = json.load(fh)
+        original = {b["action"]: b.get("keys", [])
+                    for ctx in backup.get("contexts", []) if ctx.get("symbol") == CONTEXT
+                    for b in ctx.get("bindings", [])}
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        print("Network Shortcuts: could not read bindings to restore: %s" % exc)
+        return
+    prefix = CONTEXT + ".tool:qns_"
+    for ctx in current.get("contexts", []):
+        if ctx.get("symbol") != CONTEXT:
+            continue
+        for binding in ctx.get("bindings", []):
+            sym = binding.get("action", "")
+            if not sym or sym.startswith(prefix):
+                continue
+            try:
+                if sym in original:
+                    hou.hotkeys.clearAssignments(CONTEXT, sym)
+                    for key in original[sym]:
+                        hou.hotkeys.addAssignment(CONTEXT, sym, key)
+                else:
+                    hou.hotkeys.revertToDefaults(CONTEXT, sym, True)
+            except Exception as exc:
+                print("Network Shortcuts: could not restore %s: %s" % (sym, exc))
+
+
 def install(cfg=None, overwrite=True):
     """Assign keys; restart Houdini afterwards. overwrite=False skips conflicting keys."""
     cfg = cfg or config.load()
@@ -115,6 +150,7 @@ def install(cfg=None, overwrite=True):
             with open(_backup_path(), "w", encoding="utf-8") as fh:
                 json.dump({"name": "Houdini", "version": 2, "contexts": []}, fh)
 
+    _restore_live_bindings(path)
     bindings = {}
     for action, key, own, _foreign in plan(cfg, verbose=False):
         if own and not overwrite:
